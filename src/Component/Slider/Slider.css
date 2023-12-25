@@ -1,0 +1,17 @@
+/* slider component style */
+.sliderNameContainer{
+    width:50vw;
+    margin: 20px;
+  }
+
+.sliderNameContainer>input{
+    width:100%;
+}
+.SliderRange{
+    display: flex;
+    justify-content: space-between;
+}
+.sliderMinMax{
+    display: flex;
+    justify-content: space-between;
+}

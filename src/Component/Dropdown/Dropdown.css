@@ -1,0 +1,13 @@
+.dropDownContainer{
+    width:100%;
+    padding:20px;
+}
+
+.dropDownContainer>select{
+    padding:10px;
+    width:100%;
+}
+
+.dropDownContainer>select>option{
+    font-size: 1.3rem;
+}
