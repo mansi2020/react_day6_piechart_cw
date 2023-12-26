@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+## Hosted link : https://react-day6-piechart-cw-m45x.vercel.app/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
