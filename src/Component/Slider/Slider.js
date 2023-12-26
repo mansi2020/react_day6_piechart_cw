@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Slider.css";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Slider = (props) => {
+
+    // aos animation
+    useEffect(()=>{
+        Aos.init({duration:500});
+      },[]);
+
   const [rangeVal, setRangeVal] = useState(0);
-  // onchange range
+  // onchange range---------------------------------------------------->
   const onChnageRange = (e) => {
     setRangeVal(e.target.value);
     //   change loan amount according down payment and  home value
@@ -14,7 +22,7 @@ const Slider = (props) => {
     <div className="sliderNameContainer">
       <h4>{props.title}</h4>
       <h2>
-      {props.showPercentage == true ? "%" : "$"}
+        {props.showPercentage == true ? "%" : "$"}
         {props.value}
       </h2>
       <input

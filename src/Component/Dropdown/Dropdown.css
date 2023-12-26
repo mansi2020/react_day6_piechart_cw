@@ -1,13 +1,27 @@
 .dropDownContainer{
     width:100%;
-    padding:20px;
+    margin-top: 20px;
 }
 
 .dropDownContainer>select{
-    padding:10px;
+    padding:15px 10px;
     width:100%;
+    background-color: black;
+    color:white;
+    font-size: 1.2rem;
 }
 
 .dropDownContainer>select>option{
     font-size: 1.3rem;
+}
+
+/* tenure style */
+.dropDownContainer>p{
+    background-color:black;
+    color:white;
+    position: relative;
+    display: inline;
+    width:40px;
+    top:10px;
+    left:20px;
 }

@@ -1,7 +1,6 @@
 /* slider component style */
 .sliderNameContainer{
     width:50vw;
-    margin: 20px;
   }
 
 .sliderNameContainer>input{
@@ -15,3 +14,46 @@
     display: flex;
     justify-content: space-between;
 }
+.sliderMinMax>p{
+    margin-bottom: 0.5rem;
+    font-size: small;
+    color:rgb(203, 203, 203)
+}
+
+/* heading */
+  
+  h4 {
+    margin-bottom: 10px;
+  }
+  
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: linear-gradient(to right,rgb(142, 204, 249), rgb(255, 192, 203)); /* Gradient colors */
+    outline: none;
+    margin: 10px 0;
+  }
+  
+  /* Styling the thumb */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    border: none;
+  }
+  
+  /* Hide the default track */
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+  
+
+  

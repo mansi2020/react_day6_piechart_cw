@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Slider from "./Component/Slider/Slider";
 import Dropdown from "./Component/Dropdown/Dropdown";
+import ImageBank from "./Component/Assets/3d-casual-life-business-account.png";
 // pie chart
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function App() {
-  //common function to set value
+  // animation aos
+  // aos animation
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
+
+  //useState--------------------------------------------
   const [homeValue, setHomeValue] = useState(3000);
   const [downPayment, setDownPayment] = useState(600);
   const [loanAmount, setLoanAmount] = useState(2400);
@@ -29,7 +38,7 @@ function App() {
     ],
   });
 
-  // home value------------------->
+  // home value--------------------------------------------->
   const handleHomeValueChange = (value) => {
     setHomeValue(value);
     let recalculateLoanAmount = value - downPayment;
@@ -46,7 +55,7 @@ function App() {
     setMonthlyPaymnet(newMonthlyPayment.toFixed(2));
   };
 
-  //  downpayment value------------------
+  //  downpayment value-----------------------------------------------------
   const handleDownPaymentChange = (value) => {
     setDownPayment(value);
     let recalculateLoanAmount = homeValue - value;
@@ -62,21 +71,28 @@ function App() {
       ((1 + interestPerMonth) ** totalLoanMonths - 1);
     setMonthlyPaymnet(newMonthlyPayment.toFixed(2));
 
+    //rational format generated for pie chart -- interset rate abnd principle amount
+    const totalInterestGenerated =
+      newMonthlyPayment * totalLoanMonths - (homeValue - value);
+    const totalPayment = homeValue - value + totalInterestGenerated;
+    const principalRatio = (homeValue - value) / totalPayment;
+    const interestRatio = totalInterestGenerated / totalPayment;
+
     //new chartdata
     setChartData({
       ...chartData,
       datasets: [
         {
           ...chartData.datasets[0],
-          data: [value/homeValue, interestRate/18],
+          data: [principalRatio, interestRatio],
         },
       ],
     });
   };
 
-  //loan amount------------------->
+  //loan amount--------------------------------------------------------->
   const handleLoanAmountChange = (value) => {
-    let recalculateDownPayment =homeValue-value;
+    let recalculateDownPayment = homeValue - value;
     setDownPayment(recalculateDownPayment);
     setLoanAmount(value);
 
@@ -84,21 +100,41 @@ function App() {
     let totalLoanMonths = year * 12;
     let interestPerMonth = interestRate / 1200;
     let newMonthlyPayment =
-      (value *
-        interestPerMonth *
-        (1 + interestPerMonth) ** totalLoanMonths) /
+      (value * interestPerMonth * (1 + interestPerMonth) ** totalLoanMonths) /
       ((1 + interestPerMonth) ** totalLoanMonths - 1);
     setMonthlyPaymnet(newMonthlyPayment.toFixed(2));
+
+    //rational format generated for pie chart -- interset rate abnd principle amount
+    const totalInterestGenerated = newMonthlyPayment * totalLoanMonths - value;
+    const totalPayment = value + totalInterestGenerated;
+    const principalRatio = value / totalPayment;
+    const interestRatio = totalInterestGenerated / totalPayment;
+
+    //new chartdata
+    setChartData({
+      ...chartData,
+      datasets: [
+        {
+          ...chartData.datasets[0],
+          data: [principalRatio, interestRatio],
+        },
+      ],
+    });
   };
 
-  //interestRate--------------------->
+  //interestRate----------------------------------------------------->
   const handleInterestRate = (value) => {
     setInterestRate(value);
 
     //new chartdata
     setChartData({
       ...chartData,
-      datasets: [{ ...chartData.datasets[0], data: [downPayment/homeValue, value/18] }],
+      datasets: [
+        {
+          ...chartData.datasets[0],
+          data: [downPayment / homeValue, value / 18],
+        },
+      ],
     });
 
     // monthly payment
@@ -112,7 +148,7 @@ function App() {
     setMonthlyPaymnet(newMonthlyPayment.toFixed(2));
   };
 
-  //set year------------------->
+  //set year---------------------------------------------------->
   const handleYear = (value) => {
     setYear(value);
 
@@ -127,24 +163,29 @@ function App() {
     setMonthlyPaymnet(newMonthlyPayment.toFixed(2));
   };
 
-  // monthly payment calculation------------->
-
-  //  formulas:=>
-  //  monthlyPayment = (loanAmount * interestPerMonth *(1 + interestPerMonth) ** totalLoanMonths) / ((1 + interestPerMonth) ** totalLoanMonths - 1);
-
-  // interest/Month = interestRate / 100 / 12;
-
-  //  totalLoan = loanTerm * 12
-
   return (
     <div className="App">
       {/* header */}
       <header>
         <h1>Bank of React</h1>
       </header>
+
+      {/* image */}
+      <div className="imageBank" data-aos="zoom-in">
+        <img src={ImageBank} alt="BankImage" />
+        <div className="App_imageBank_content">
+          <h1>Welcome to React Bank!</h1>
+          <h3>
+            Find out your estimated monthly payments instantly. Get a loan at
+            competitive rates with flexible payment options tailored to you.
+          </h3>
+          <button>Go Down</button>
+        </div>
+      </div>
+
       {/* home value */}
       <div className="AppSliderAndDropDownContainer">
-        <div className="appSliderContainer">
+        <div className="appSliderContainer" data-aos="fade-right">
           <Slider
             title="Home Value"
             min="1000"
@@ -187,11 +228,18 @@ function App() {
           </div>
         </div>
         {/* chart section */}
-        <div className="AppChartContainer">
+        <div className="AppChartContainer" data-aos="fade-left">
           <h1>Monthly Payment : $ {monthlyPayment}</h1>
           <Pie data={chartData} />
         </div>
       </div>
+
+      {/* footer */}
+      <footer className="footer">
+        <div className="footerBottom">
+          <p>&copy; 2023 Bank Name. All Rights Reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
