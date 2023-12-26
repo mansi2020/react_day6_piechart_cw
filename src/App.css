@@ -1,87 +1,83 @@
-*{
-  margin:0;
-  padding:0;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
 }
 
 /* app */
-.App{
+.App {
   background-color: black;
-  color:white;
+  color: white;
 }
 
 /* AppSlider and pie chart Container */
-.AppSliderAndDropDownContainer{
+.AppSliderAndDropDownContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:10px 30px;
-  
+  padding: 10px 30px;
 }
 
 /* header */
-header>h1{
-  padding:20px;
-  background-color: rgb(114,156,164);
-  color:white;
+header > h1 {
+  padding: 20px;
+  background-color: rgb(114, 156, 164);
+  color: white;
   box-shadow: 2px 2px 10px rgb(69, 69, 69);
 }
 
 /* illustartion image */
-.imageBank>img{
-  width:45%;
-  
+.imageBank > img {
+  width: 45%;
 }
-.imageBank{
-  width:100%;
-  height:calc(100vh - 100px);
+.imageBank {
+  width: 100%;
+  height: calc(100vh - 100px);
   display: flex;
   align-items: center;
-  justify-content:space-between;
-  padding:20px;
+  justify-content: space-between;
+  padding: 20px;
 }
 
 /* content of App_imageBank_content */
-.App_imageBank_content{
-  width:50%;
+.App_imageBank_content {
+  width: 50%;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.App_imageBank_content>h1{
+.App_imageBank_content > h1 {
   margin-bottom: 1rem;
   font-size: 3rem;
 }
-.App_imageBank_content>h3{
-  width:75%;
+.App_imageBank_content > h3 {
+  width: 75%;
   font-weight: 300;
 }
-.App_imageBank_content>button{
-  padding:10px 3rem;
-  margin-top:3rem;
-  background-color:rgb(253, 164, 186);
+.App_imageBank_content > button {
+  padding: 10px 3rem;
+  margin-top: 3rem;
+  background-color: rgb(253, 164, 186);
   font-weight: 600;
   font-size: 1rem;
-  border:none;
+  border: none;
   border-radius: 10px;
-  color:black;
+  color: black;
   transition: 0.2s ease-in-out;
 }
-.App_imageBank_content>button:hover{
+.App_imageBank_content > button:hover {
   transform: translateY(-2px);
   box-shadow: 2px 2px 20px rgb(253, 164, 186);
 }
 
 /* footer style */
 .footerBottom {
-  padding:20px;
+  padding: 20px;
   text-align: center;
   font-size: 14px;
-  background-color:rgb(54, 54, 54);
+  background-color: rgb(54, 54, 54);
   margin-top: 2rem;
 }
-
-
