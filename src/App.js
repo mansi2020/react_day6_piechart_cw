@@ -72,33 +72,30 @@ function App() {
     setMonthlyPaymnet(newMonthlyPayment.toFixed(2));
 
     //rational format generated for pie chart -- interset rate abnd principle amount
-    // const totalInterestGenerated =
-    //   newMonthlyPayment * totalLoanMonths - (homeValue - value);
-    // const totalPayment = homeValue - value + totalInterestGenerated;
-    // const principalRatio = (homeValue - value) / totalPayment;
-    // const interestRatio = totalInterestGenerated / totalPayment;
-
+    const totalInterestGenerated =
+      newMonthlyPayment * totalLoanMonths - loanAmount;
     //new chartdata
     setChartData({
       ...chartData,
       datasets: [
         {
           ...chartData.datasets[0],
-          data: [parseFloat(value)+parseFloat(loanAmount), interestRate],
+          data: [
+            parseFloat(loanAmount) + parseFloat(downPayment),
+            parseFloat(totalInterestGenerated),
+          ],
         },
       ],
     });
-    console.log((value)+(loanAmount));
   };
 
   //loan amount--------------------------------------------------------->
   const handleLoanAmountChange = (value) => {
     let recalculateDownPayment = homeValue - value;
     setDownPayment(recalculateDownPayment);
-    setLoanAmount((prevLoanAmount)=>{
+    setLoanAmount((prevLoanAmount) => {
       return value;
     });
-    
 
     // monthly payment
     let totalLoanMonths = year * 12;
@@ -110,21 +107,19 @@ function App() {
 
     //rational format generated for pie chart -- interset rate abnd principle amount
     const totalInterestGenerated = newMonthlyPayment * totalLoanMonths - value;
-    const totalPayment = value + totalInterestGenerated;
-    const principalRatio = value / totalPayment;
-    const interestRatio = totalInterestGenerated / totalPayment;
-
     //new chartdata
     setChartData({
       ...chartData,
       datasets: [
         {
           ...chartData.datasets[0],
-          data: [parseFloat(value)+parseFloat(downPayment), interestRatio],
+          data: [
+            parseFloat(loanAmount) + parseFloat(downPayment),
+            parseFloat(totalInterestGenerated),
+          ],
         },
       ],
     });
-    // console.log(value+downPayment);
   };
 
   console.log(loanAmount);
