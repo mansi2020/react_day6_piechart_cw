@@ -72,11 +72,11 @@ function App() {
     setMonthlyPaymnet(newMonthlyPayment.toFixed(2));
 
     //rational format generated for pie chart -- interset rate abnd principle amount
-    const totalInterestGenerated =
-      newMonthlyPayment * totalLoanMonths - (homeValue - value);
-    const totalPayment = homeValue - value + totalInterestGenerated;
-    const principalRatio = (homeValue - value) / totalPayment;
-    const interestRatio = totalInterestGenerated / totalPayment;
+    // const totalInterestGenerated =
+    //   newMonthlyPayment * totalLoanMonths - (homeValue - value);
+    // const totalPayment = homeValue - value + totalInterestGenerated;
+    // const principalRatio = (homeValue - value) / totalPayment;
+    // const interestRatio = totalInterestGenerated / totalPayment;
 
     //new chartdata
     setChartData({
@@ -84,17 +84,21 @@ function App() {
       datasets: [
         {
           ...chartData.datasets[0],
-          data: [principalRatio, interestRatio],
+          data: [parseFloat(value)+parseFloat(loanAmount), interestRate],
         },
       ],
     });
+    console.log((value)+(loanAmount));
   };
 
   //loan amount--------------------------------------------------------->
   const handleLoanAmountChange = (value) => {
     let recalculateDownPayment = homeValue - value;
     setDownPayment(recalculateDownPayment);
-    setLoanAmount(value);
+    setLoanAmount((prevLoanAmount)=>{
+      return value;
+    });
+    
 
     // monthly payment
     let totalLoanMonths = year * 12;
@@ -116,11 +120,14 @@ function App() {
       datasets: [
         {
           ...chartData.datasets[0],
-          data: [principalRatio, interestRatio],
+          data: [parseFloat(value)+parseFloat(downPayment), interestRatio],
         },
       ],
     });
+    // console.log(value+downPayment);
   };
+
+  console.log(loanAmount);
 
   //interestRate----------------------------------------------------->
   const handleInterestRate = (value) => {
